@@ -6,7 +6,7 @@ import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle }
 import { ReviewForm } from '@/features/reviews/components/ReviewForm'
 import { selectMyReviewForJob } from '@/features/reviews/store/reviewsSlice'
 import type { MyReviewSummary } from '@/features/reviews/types/review.types'
-import { isWorkerReviewer, REVIEW_EDIT_WINDOW_MS } from '@/features/reviews/utils/dimensions'
+import { isWorkerReviewer } from '@/features/reviews/utils/dimensions'
 import { useAppSelector } from '@/store/hooks'
 
 interface JobReviewPanelProps {
@@ -22,14 +22,11 @@ interface JobReviewPanelProps {
 export function JobReviewPanel({ jobId, relations, myReview, onSaved }: JobReviewPanelProps) {
   const saved = useAppSelector((state) => selectMyReviewForJob(state, jobId))
   const [editing, setEditing] = useState(false)
-  const [mountedAt] = useState(() => Date.now())
   const workerVariant = isWorkerReviewer(relations)
 
   const current = saved ?? myReview
-  // A full review (from this session) knows `editable`; otherwise estimate from the 24 h window.
-  const editable = saved
-    ? saved.editable
-    : !!myReview?.createdAt && mountedAt - new Date(myReview.createdAt).getTime() < REVIEW_EDIT_WINDOW_MS
+  // The server decides editability (one edit within 24 h); a review saved this session carries it too.
+  const editable = saved ? saved.editable : !!myReview?.editable
 
   const title = workerVariant ? 'Rate the customer' : 'Rate the worker'
 

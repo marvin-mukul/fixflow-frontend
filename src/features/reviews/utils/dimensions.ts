@@ -9,8 +9,6 @@ export const DIMENSION_LABELS: Record<RatingDimension, { label: string; hint: st
   value: { label: 'Value for money', hint: 'Was the price fair for the work?' },
 }
 
-export const REVIEW_EDIT_WINDOW_MS = 24 * 60 * 60 * 1000
-
 /**
  * Mirrors the API rule: on-site dimensions for the raiser/tenant, value for the
  * payer/owner, overall for everyone. A worker rates the customer (overall + comment).

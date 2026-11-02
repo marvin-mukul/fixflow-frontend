@@ -33,6 +33,9 @@ export interface MyReviewSummary {
   id: string
   overall: number
   createdAt?: string
+  editedAt?: string | null
+  /** Server-computed: not edited yet and still inside the 24 h window. */
+  editable?: boolean
 }
 
 export interface RatingBreakdown {
