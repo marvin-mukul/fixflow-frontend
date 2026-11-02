@@ -14,6 +14,16 @@ export const defaultHandlers = [
   http.get(url('/properties'), () => HttpResponse.json({ items: [] })),
   http.get(url('/requests'), () => HttpResponse.json({ items: [], nextCursor: null })),
   http.get(url('/categories'), () => HttpResponse.json({ items: [] })),
+  http.get(url('/admin/stats'), () =>
+    HttpResponse.json({
+      users: {},
+      workers: {},
+      requests: {},
+      jobs: { total: 0, completed: 0 },
+      money: { gmvPaise: 0, commissionPaise: 0, commissionGstPaise: 0, paidInvoices: 0 },
+      rates: { acceptance: 0, completion: 0, dispute: 0 },
+    }),
+  ),
 ]
 
 /** Shared MSW server. Tests add handlers with `server.use(...)`. */
