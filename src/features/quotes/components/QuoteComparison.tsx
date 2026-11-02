@@ -1,5 +1,6 @@
 import { ClockIcon, MapPinIcon, ReceiptIndianRupeeIcon, TrophyIcon, WrenchIcon } from 'lucide-react'
 import { useEffect, useMemo, useRef, useState } from 'react'
+import { Link } from 'react-router'
 import { toast } from 'sonner'
 import { ConfirmDialog } from '@/components/common/ConfirmDialog'
 import { EmptyState } from '@/components/common/EmptyState'
@@ -11,6 +12,7 @@ import { StatusBadge } from '@/components/common/StatusBadge'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { buildPath, PATHS } from '@/constants/paths'
 import {
   acceptQuote,
   fetchRequestQuotes,
@@ -125,7 +127,12 @@ export function QuoteComparison({ requestId, canAccept, onAccepted }: QuoteCompa
                         Best match
                       </Badge>
                     )}
-                    <span className="font-medium">{quote.worker.name}</span>
+                    <Link
+                      to={buildPath(PATHS.WORKER_PUBLIC_PROFILE, { id: quote.worker.id })}
+                      className="font-medium underline-offset-4 hover:underline"
+                    >
+                      {quote.worker.name}
+                    </Link>
                     <StatusBadge kind="quote" status={quote.status} />
                   </div>
                   <StarRating value={quote.worker.rating.overall} count={quote.worker.rating.count} />
