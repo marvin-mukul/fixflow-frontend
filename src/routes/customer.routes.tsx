@@ -25,6 +25,13 @@ export const customerRoutes: RouteObject[] = [
                 path: PATHS.CUSTOMER_PROPERTY_EDIT,
                 lazy: page(() => import('@/pages/PropertyEditPage')),
               },
+              { path: PATHS.CUSTOMER_REQUESTS, lazy: page(() => import('@/pages/RequestsPage')) },
+              { path: PATHS.CUSTOMER_REQUEST_NEW, lazy: page(() => import('@/pages/RaiseRequestPage')) },
+              {
+                path: PATHS.CUSTOMER_REQUEST_DETAIL,
+                lazy: page(() => import('@/pages/RequestDetailPage')),
+              },
+              { path: PATHS.CUSTOMER_APPROVALS, lazy: page(() => import('@/pages/ApprovalsPage')) },
             ],
           },
         ],

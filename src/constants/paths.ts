@@ -12,6 +12,10 @@ export const PATHS = {
   CUSTOMER_PROPERTY_NEW: '/app/properties/new',
   CUSTOMER_PROPERTY_DETAIL: '/app/properties/:id',
   CUSTOMER_PROPERTY_EDIT: '/app/properties/:id/edit',
+  CUSTOMER_REQUESTS: '/app/requests',
+  CUSTOMER_REQUEST_NEW: '/app/requests/new',
+  CUSTOMER_REQUEST_DETAIL: '/app/requests/:id',
+  CUSTOMER_APPROVALS: '/app/approvals',
 
   WORKER_HOME: '/worker',
 

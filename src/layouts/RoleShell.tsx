@@ -3,6 +3,7 @@ import { AppShell } from '@/components/layout/AppShell'
 import type { NavItem } from '@/components/layout/types'
 import { PATHS } from '@/constants/paths'
 import { useAuth } from '@/features/auth/hooks/useAuth'
+import { NotificationBell } from '@/features/notifications/components/NotificationBell'
 
 interface RoleShellProps {
   roleLabel: string
@@ -29,6 +30,7 @@ export function RoleShell({ roleLabel, homePath, navItems }: RoleShellProps) {
       navItems={navItems}
       user={user}
       onLogout={() => void handleLogout()}
+      headerActions={<NotificationBell />}
     />
   )
 }
