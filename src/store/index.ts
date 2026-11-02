@@ -1,22 +1,36 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit'
+import { combineReducers, configureStore, isAnyOf } from '@reduxjs/toolkit'
 import {
   authReducer,
+  logout,
   refreshSession,
   sessionCleared,
 } from '@/features/auth/store/authSlice'
 import { notificationsReducer } from '@/features/notifications/store/notificationsSlice'
 import { propertiesReducer } from '@/features/properties/store/propertiesSlice'
+import { quotesReducer } from '@/features/quotes/store/quotesSlice'
 import { requestsReducer } from '@/features/requests/store/requestsSlice'
+import { workerReducer } from '@/features/worker/store/workerSlice'
 import { setAuthHandlers } from '@/lib/axios'
 
-const rootReducer = combineReducers({
+const appReducer = combineReducers({
   auth: authReducer,
   properties: propertiesReducer,
   requests: requestsReducer,
   notifications: notificationsReducer,
+  quotes: quotesReducer,
+  worker: workerReducer,
 })
 
-export type RootState = ReturnType<typeof rootReducer>
+export type RootState = ReturnType<typeof appReducer>
+
+const isSessionEnd = isAnyOf(logout.fulfilled, logout.rejected, sessionCleared)
+
+/** Drops every feature slice when the session ends so the next user starts clean. */
+const rootReducer: typeof appReducer = (state, action) =>
+  appReducer(
+    isSessionEnd(action) && state ? ({ auth: state.auth } as Partial<RootState> as RootState) : state,
+    action,
+  )
 
 export function makeStore(preloadedState?: Partial<RootState>) {
   return configureStore({ reducer: rootReducer, preloadedState })

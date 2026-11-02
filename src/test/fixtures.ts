@@ -89,3 +89,74 @@ export function makeRequest(overrides: Record<string, unknown> = {}) {
     ...overrides,
   }
 }
+
+export function makeQuote(overrides: Record<string, unknown> = {}) {
+  return {
+    id: 'q_1',
+    requestId: IDS.request,
+    status: 'SUBMITTED',
+    version: 1,
+    labourPaise: 150000,
+    materialsPaise: 50000,
+    totalPaise: 200000,
+    notes: null,
+    etaHours: 4,
+    proposedSlot: null,
+    validUntil: '2026-11-05T12:00:00.000Z',
+    createdAt: '2026-11-01T10:00:00.000Z',
+    worker: {
+      id: 'w_1',
+      name: 'Worker One',
+      jobsCompleted: 10,
+      rating: { count: 5, bayesian: 4.2, overall: 4.5, quality: 4.6, punctuality: 4.4, behaviour: 4.8, value: 4.1 },
+    },
+    distanceKm: 3.2,
+    rankScore: 0.5,
+    ...overrides,
+  }
+}
+
+export function makeWorkerProfile(overrides: Record<string, unknown> = {}) {
+  return {
+    id: 'wp_1',
+    userId: 'u_w',
+    name: 'Ravi Worker',
+    bio: '',
+    baseLat: 30.3,
+    baseLng: 78.0,
+    serviceRadiusKm: 10,
+    isAvailable: true,
+    verificationStatus: 'VERIFIED',
+    hasIdDocument: true,
+    gstin: null,
+    state: 'Uttarakhand',
+    categories: [{ id: IDS.category, slug: 'plumbing', name: 'Plumbing', icon: 'droplet', yearsExperience: 5 }],
+    verifiedAt: '2026-10-01T10:00:00.000Z',
+    ...overrides,
+  }
+}
+
+export function makeLead(overrides: Record<string, unknown> = {}) {
+  return {
+    requestId: IDS.request,
+    title: 'Kitchen sink leaking',
+    description: 'Water drips under the sink since yesterday.',
+    priority: 'HIGH',
+    status: 'OPEN_FOR_QUOTES',
+    category: { id: IDS.category, slug: 'plumbing', name: 'Plumbing', icon: 'droplet' },
+    locality: { city: 'Dehradun', pincode: '248001' },
+    approxDistanceKm: 2.4,
+    location: { lat: 30.32, lng: 78.03 },
+    preferredSlots: [],
+    quoteDeadline: '2026-11-03T12:00:00.000Z',
+    media: [],
+    myQuote: null,
+    canQuote: true,
+    unmasked: false,
+    address: null,
+    contact: null,
+    jobId: null,
+    matchedAt: '2026-11-01T09:05:00.000Z',
+    ...overrides,
+  }
+}

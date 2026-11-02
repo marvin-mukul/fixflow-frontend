@@ -83,3 +83,13 @@ export const WORKER_VERIFICATION = {
   SUSPENDED: { label: 'Suspended', variant: 'destructive' },
 } as const satisfies Record<string, StatusConfig>
 export type WorkerVerificationStatus = keyof typeof WORKER_VERIFICATION
+
+/** Request statuses in which the payer's quote list is relevant. */
+export const QUOTES_VISIBLE_IN: readonly RequestStatus[] = [
+  'OPEN_FOR_QUOTES',
+  'SCHEDULED',
+  'IN_PROGRESS',
+  'PENDING_SIGN_OFF',
+  'COMPLETED',
+  'DISPUTED',
+]

@@ -18,6 +18,11 @@ export const PATHS = {
   CUSTOMER_APPROVALS: '/app/approvals',
 
   WORKER_HOME: '/worker',
+  WORKER_ONBOARDING: '/worker/onboarding',
+  WORKER_LEADS: '/worker/leads',
+  WORKER_LEAD_DETAIL: '/worker/leads/:requestId',
+  WORKER_QUOTES: '/worker/quotes',
+  WORKER_PROFILE: '/worker/profile',
 
   ADMIN_HOME: '/admin',
   NOT_FOUND: '*',
