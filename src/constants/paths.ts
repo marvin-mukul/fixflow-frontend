@@ -27,7 +27,16 @@ export const PATHS = {
   WORKER_EARNINGS: '/worker/earnings',
   WORKER_PROFILE: '/worker/profile',
 
+  /** Admin dashboard (platform stats). */
   ADMIN_HOME: '/admin',
+  ADMIN_WORKERS: '/admin/workers',
+  ADMIN_DISPUTES: '/admin/disputes',
+  ADMIN_PAYMENTS: '/admin/payments',
+  ADMIN_CATEGORIES: '/admin/categories',
+  /** Read-only for ADMIN, editable for SUPERADMIN. */
+  ADMIN_SETTINGS: '/admin/settings',
+  /** SUPERADMIN only. */
+  ADMIN_ADMINS: '/admin/admins',
 
   /** Any signed-in participant; also the payment return landing page (`?status=`). */
   INVOICE_DETAIL: '/invoices/:id',

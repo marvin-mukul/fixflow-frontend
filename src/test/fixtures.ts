@@ -226,3 +226,48 @@ export function makeInvoice(overrides: Record<string, unknown> = {}) {
     ...overrides,
   }
 }
+
+export function makeAdminWorker(overrides: Record<string, unknown> = {}) {
+  return {
+    ...makeWorkerProfile({ verificationStatus: 'PENDING', verifiedAt: null }),
+    email: 'ravi@demo.fixflow',
+    phone: '+919811111111',
+    createdAt: '2026-10-30T10:00:00.000Z',
+    idDocumentUrl: null,
+    ...overrides,
+  }
+}
+
+export function makeSettings(overrides: Record<string, unknown> = {}) {
+  return {
+    commissionPercent: 10,
+    gstPercent: 18,
+    tcsPercent: 0.5,
+    gstOnCommission: true,
+    matchRadiusKm: 10,
+    reopenRadiusKm: 20,
+    fanoutLimit: 20,
+    newcomerSlots: 2,
+    quoteWindowHours: { LOW: 24, MEDIUM: 24, HIGH: 6, EMERGENCY: 1 },
+    autoConfirmHours: 72,
+    reviewWindowDays: 7,
+    rankingWeights: { rating: 0.4, distance: 0.3, completion: 0.2, response: 0.1 },
+    bayesianC: 10,
+    bayesianPriorMean: 4,
+    ...overrides,
+  }
+}
+
+export function makePayment(overrides: Record<string, unknown> = {}) {
+  return {
+    id: 'pay_1',
+    provider: 'mock',
+    providerOrderId: 'order_1',
+    status: 'PAID',
+    amountPaise: 236000,
+    refundedPaise: 0,
+    invoice: { id: INVOICE_ID, number: 'FF/2026-27/000001', totalPaise: 236000, status: 'PAID' },
+    createdAt: '2026-11-02T10:00:00.000Z',
+    ...overrides,
+  }
+}

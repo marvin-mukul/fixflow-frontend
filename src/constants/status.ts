@@ -109,3 +109,24 @@ export const INVOICE_STATUS = {
   REFUNDED: { label: 'Refunded', variant: 'secondary' },
   PARTIALLY_REFUNDED: { label: 'Partly refunded', variant: 'secondary' },
 } as const satisfies Record<string, StatusConfig>
+
+export const DISPUTE_STATUS = {
+  OPEN: { label: 'Open', variant: 'destructive' },
+  RESOLVED: { label: 'Resolved', variant: 'default', className: 'bg-emerald-600 text-white' },
+} as const satisfies Record<string, StatusConfig>
+
+export const PAYMENT_STATUS = {
+  CREATED: { label: 'Created', variant: 'outline' },
+  PAID: { label: 'Paid', variant: 'default', className: 'bg-emerald-600 text-white' },
+  FAILED: { label: 'Failed', variant: 'destructive' },
+  REFUNDED: { label: 'Refunded', variant: 'secondary' },
+  PARTIALLY_REFUNDED: { label: 'Partly refunded', variant: 'secondary' },
+} as const satisfies Record<string, StatusConfig>
+
+/** Short worker verification labels for admin tables and tabs. */
+export const WORKER_STATUS_SHORT = {
+  PENDING: { label: 'Pending', variant: 'outline', className: 'border-amber-300 text-amber-700 dark:text-amber-300' },
+  VERIFIED: { label: 'Verified', variant: 'default', className: 'bg-emerald-600 text-white' },
+  REJECTED: { label: 'Rejected', variant: 'destructive' },
+  SUSPENDED: { label: 'Suspended', variant: 'destructive' },
+} as const satisfies Record<WorkerVerificationStatus, StatusConfig>

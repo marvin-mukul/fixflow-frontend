@@ -24,3 +24,8 @@ export function loadCategories(): Promise<Category[]> {
 export function cachedCategories(): Category[] | null {
   return cache
 }
+
+/** Drops the cache after an admin changes categories so the next load is fresh. */
+export function invalidateCategories(): void {
+  cache = null
+}
