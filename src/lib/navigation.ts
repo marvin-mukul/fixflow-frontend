@@ -19,3 +19,13 @@ export function navigateTo(to: string, options?: NavigateOptions) {
   }
   window.location.assign(to)
 }
+
+/**
+ * Full page navigation (payment gateways, API redirects). An object so tests
+ * can stub it with `vi.spyOn(browserLocation, 'assign')`.
+ */
+export const browserLocation = {
+  assign(url: string) {
+    window.location.assign(url)
+  },
+}

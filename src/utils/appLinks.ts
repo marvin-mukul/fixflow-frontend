@@ -14,6 +14,8 @@ const RULES: LinkRule[] = [
   { pattern: /^\/worker\/jobs\/?$/, to: () => PATHS.WORKER_JOBS },
   { pattern: /^\/worker\/leads\/([^/?#]+)/, to: (m) => buildPath(PATHS.WORKER_LEAD_DETAIL, { requestId: m[1] ?? '' }) },
   { pattern: /^\/worker\/profile\/?$/, to: () => PATHS.WORKER_PROFILE },
+  { pattern: /^\/worker\/earnings\/?$/, to: () => PATHS.WORKER_EARNINGS },
+  { pattern: /^\/invoices\/([^/?#]+)/, to: (m) => buildPath(PATHS.INVOICE_DETAIL, { id: m[1] ?? '' }) },
 ]
 
 export function resolveAppLink(link: string | null | undefined): string | null {
