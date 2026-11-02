@@ -4,12 +4,16 @@ import {
   refreshSession,
   sessionCleared,
 } from '@/features/auth/store/authSlice'
+import { notificationsReducer } from '@/features/notifications/store/notificationsSlice'
 import { propertiesReducer } from '@/features/properties/store/propertiesSlice'
+import { requestsReducer } from '@/features/requests/store/requestsSlice'
 import { setAuthHandlers } from '@/lib/axios'
 
 const rootReducer = combineReducers({
   auth: authReducer,
   properties: propertiesReducer,
+  requests: requestsReducer,
+  notifications: notificationsReducer,
 })
 
 export type RootState = ReturnType<typeof rootReducer>

@@ -1,4 +1,4 @@
-import { Suspense } from 'react'
+import { Suspense, type ReactNode } from 'react'
 import { Outlet } from 'react-router'
 import { Loader } from '@/components/common/Loader'
 import { AppSidebar } from '@/components/layout/AppSidebar'
@@ -12,10 +12,12 @@ interface AppShellProps {
   navItems: NavItem[]
   user: ShellUser
   onLogout: () => void
+  /** Right side of the top bar (e.g. notification bell). */
+  headerActions?: ReactNode
 }
 
 /** Sidebar shell (from shadcn `sidebar-07`) shared by every role layout. */
-export function AppShell(props: AppShellProps) {
+export function AppShell({ headerActions, ...props }: AppShellProps) {
   return (
     <SidebarProvider>
       <AppSidebar {...props} />
@@ -24,6 +26,7 @@ export function AppShell(props: AppShellProps) {
           <SidebarTrigger className="-ml-1" />
           <Separator orientation="vertical" className="mr-2 data-vertical:h-4 data-vertical:self-auto" />
           <span className="text-sm font-medium text-muted-foreground">{props.roleLabel}</span>
+          {headerActions && <div className="ml-auto flex items-center gap-2">{headerActions}</div>}
         </header>
         <div className="flex flex-1 flex-col gap-6 p-4 md:p-6">
           <Suspense fallback={<Loader />}>
