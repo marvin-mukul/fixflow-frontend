@@ -7,6 +7,17 @@ export const publicRoutes: RouteObject[] = [
     lazy: () => import('@/pages/LandingPage').then((m) => ({ Component: m.default })),
   },
   {
+    // Invite links (`APP_URL/invitations/:token`) work for guests and signed-in users.
+    lazy: () => import('@/layouts/AuthLayout').then((m) => ({ Component: m.default })),
+    children: [
+      {
+        path: PATHS.ACCEPT_INVITATION,
+        lazy: () =>
+          import('@/pages/AcceptInvitationPage').then((m) => ({ Component: m.default })),
+      },
+    ],
+  },
+  {
     path: PATHS.FORBIDDEN,
     lazy: () => import('@/pages/ForbiddenPage').then((m) => ({ Component: m.default })),
   },

@@ -5,10 +5,32 @@ export const PATHS = {
   CHANGE_PASSWORD: '/change-password',
   FORBIDDEN: '/403',
   SERVER_ERROR: '/500',
+  ACCEPT_INVITATION: '/invitations/:token',
+
   CUSTOMER_HOME: '/app',
+  CUSTOMER_PROPERTIES: '/app/properties',
+  CUSTOMER_PROPERTY_NEW: '/app/properties/new',
+  CUSTOMER_PROPERTY_DETAIL: '/app/properties/:id',
+  CUSTOMER_PROPERTY_EDIT: '/app/properties/:id/edit',
+
   WORKER_HOME: '/worker',
+
   ADMIN_HOME: '/admin',
   NOT_FOUND: '*',
 } as const
 
 export type AppPath = (typeof PATHS)[keyof typeof PATHS]
+
+type ParamNames<P extends string> = P extends `${string}:${infer Param}/${infer Rest}`
+  ? Param | ParamNames<`/${Rest}`>
+  : P extends `${string}:${infer Param}`
+    ? Param
+    : never
+
+type PathParams<P extends string> = { [K in ParamNames<P>]: string }
+
+/** Fills `:param` segments of a `PATHS` pattern, e.g. `buildPath(PATHS.CUSTOMER_PROPERTY_DETAIL, { id })`. */
+export function buildPath<P extends AppPath>(pattern: P, params: PathParams<P>): string {
+  const values = params as Record<string, string>
+  return pattern.replace(/:([A-Za-z]+)/g, (_, name: string) => encodeURIComponent(values[name] ?? ''))
+}

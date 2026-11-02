@@ -17,6 +17,16 @@ export interface AuthHandlers {
   onSessionExpired: () => void
 }
 
+declare module 'axios' {
+  interface AxiosRequestConfig {
+    /**
+     * Let a 403 reach the caller instead of redirecting to the 403 page. Use it for
+     * business-rule 403s the screen explains itself (e.g. INVITATION_EMAIL_MISMATCH).
+     */
+    skipForbiddenRedirect?: boolean
+  }
+}
+
 type RetriableConfig = InternalAxiosRequestConfig & { _retry?: boolean }
 
 /** Endpoints whose 401/403 must reach the caller untouched (forms show them). */
@@ -78,7 +88,7 @@ api.interceptors.response.use(
       }
     }
 
-    if (apiError.status === 403 && !authEndpoint) {
+    if (apiError.status === 403 && !authEndpoint && !config?.skipForbiddenRedirect) {
       if (apiError.code === 'PASSWORD_CHANGE_REQUIRED') {
         navigateTo(PATHS.CHANGE_PASSWORD, { replace: true })
       } else {
