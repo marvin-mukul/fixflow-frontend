@@ -1,5 +1,6 @@
 import { CheckIcon, PhoneIcon, ShieldAlertIcon, TriangleAlertIcon } from 'lucide-react'
 import type { ReactNode } from 'react'
+import { Link } from 'react-router'
 import { toast } from 'sonner'
 import { ConfirmDialog } from '@/components/common/ConfirmDialog'
 import { ErrorAlert } from '@/components/common/ErrorAlert'
@@ -11,6 +12,7 @@ import { StatusBadge } from '@/components/common/StatusBadge'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { buildPath, PATHS } from '@/constants/paths'
 import { JobProgress } from '@/features/jobs/components/JobProgress'
 import { useJob } from '@/features/jobs/hooks/useJobs'
 import { confirmJob, disputeJob } from '@/features/jobs/store/jobsSlice'
@@ -23,14 +25,12 @@ interface JobTrackingPanelProps {
   jobId: string
   /** Called after confirm/dispute so the page can refresh the request. */
   onChanged: () => void
-  /** Renders the worker's name (e.g. as a link to their public profile). */
-  renderWorker?: (job: Job) => ReactNode
   /** Invoice / review panels composed by the page. */
   renderExtra?: (job: Job, refresh: () => void) => ReactNode
 }
 
 /** Customer view of an accepted job: progress, worker, after photos, confirm/dispute. */
-export function JobTrackingPanel({ jobId, onChanged, renderWorker, renderExtra }: JobTrackingPanelProps) {
+export function JobTrackingPanel({ jobId, onChanged, renderExtra }: JobTrackingPanelProps) {
   const dispatch = useAppDispatch()
   const { job, status, error, refresh } = useJob(jobId)
 
@@ -123,7 +123,14 @@ export function JobTrackingPanel({ jobId, onChanged, renderWorker, renderExtra }
           <dl className="grid gap-4 text-sm sm:grid-cols-3">
             <div className="flex flex-col gap-0.5">
               <dt className="text-xs text-muted-foreground">Worker</dt>
-              <dd className="font-medium">{renderWorker ? renderWorker(job) : job.worker.name}</dd>
+              <dd className="font-medium">
+                <Link
+                  to={buildPath(PATHS.WORKER_PUBLIC_PROFILE, { id: job.worker.id })}
+                  className="underline-offset-4 hover:underline"
+                >
+                  {job.worker.name}
+                </Link>
+              </dd>
             </div>
             <div className="flex flex-col gap-0.5">
               <dt className="text-xs text-muted-foreground">Phone</dt>

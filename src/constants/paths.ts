@@ -33,6 +33,7 @@ export const PATHS = {
   INVOICE_DETAIL: '/invoices/:id',
   /** Mock provider checkout (`PAYMENT_PROVIDER=mock`). */
   MOCK_PAY: '/pay/mock/:orderId',
+  WORKER_PUBLIC_PROFILE: '/workers/:id',
   NOT_FOUND: '*',
 } as const
 

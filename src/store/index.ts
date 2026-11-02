@@ -10,6 +10,7 @@ import { jobsReducer } from '@/features/jobs/store/jobsSlice'
 import { notificationsReducer } from '@/features/notifications/store/notificationsSlice'
 import { propertiesReducer } from '@/features/properties/store/propertiesSlice'
 import { quotesReducer } from '@/features/quotes/store/quotesSlice'
+import { reviewsReducer } from '@/features/reviews/store/reviewsSlice'
 import { requestsReducer } from '@/features/requests/store/requestsSlice'
 import { workerReducer } from '@/features/worker/store/workerSlice'
 import { setAuthHandlers } from '@/lib/axios'
@@ -23,6 +24,7 @@ const appReducer = combineReducers({
   worker: workerReducer,
   jobs: jobsReducer,
   invoices: invoicesReducer,
+  reviews: reviewsReducer,
 })
 
 export type RootState = ReturnType<typeof appReducer>

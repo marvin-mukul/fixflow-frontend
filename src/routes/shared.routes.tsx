@@ -10,7 +10,10 @@ export const sharedRoutes: RouteObject[] = [
     children: [
       {
         lazy: () => import('@/layouts/ParticipantLayout').then((m) => ({ Component: m.default })),
-        children: [{ path: PATHS.INVOICE_DETAIL, lazy: page(() => import('@/pages/InvoicePage')) }],
+        children: [
+          { path: PATHS.INVOICE_DETAIL, lazy: page(() => import('@/pages/InvoicePage')) },
+          { path: PATHS.WORKER_PUBLIC_PROFILE, lazy: page(() => import('@/pages/WorkerPublicProfilePage')) },
+        ],
       },
       {
         lazy: () => import('@/layouts/AuthLayout').then((m) => ({ Component: m.default })),
