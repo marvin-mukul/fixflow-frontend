@@ -1,4 +1,4 @@
-import { LayoutDashboardIcon, RadarIcon, ReceiptIndianRupeeIcon, UserRoundCogIcon } from 'lucide-react'
+import { BriefcaseIcon, LayoutDashboardIcon, RadarIcon, ReceiptIndianRupeeIcon, UserRoundCogIcon } from 'lucide-react'
 import { PATHS } from '@/constants/paths'
 import { RoleShell } from '@/layouts/RoleShell'
 
@@ -6,6 +6,7 @@ const NAV = [
   { title: 'Dashboard', to: PATHS.WORKER_HOME, icon: <LayoutDashboardIcon />, exact: true },
   { title: 'Leads', to: PATHS.WORKER_LEADS, icon: <RadarIcon /> },
   { title: 'My quotes', to: PATHS.WORKER_QUOTES, icon: <ReceiptIndianRupeeIcon /> },
+  { title: 'Jobs', to: PATHS.WORKER_JOBS, icon: <BriefcaseIcon /> },
   { title: 'Profile', to: PATHS.WORKER_PROFILE, icon: <UserRoundCogIcon /> },
 ]
 
