@@ -23,3 +23,11 @@ export interface ApiErrorEnvelope {
     requestId?: string
   }
 }
+
+export type AsyncStatus = 'idle' | 'loading' | 'succeeded' | 'failed'
+
+/** Cursor-paginated list envelope used by list endpoints. */
+export interface CursorPage<T> {
+  items: T[]
+  nextCursor: string | null
+}

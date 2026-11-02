@@ -4,10 +4,12 @@ import {
   refreshSession,
   sessionCleared,
 } from '@/features/auth/store/authSlice'
+import { propertiesReducer } from '@/features/properties/store/propertiesSlice'
 import { setAuthHandlers } from '@/lib/axios'
 
 const rootReducer = combineReducers({
   auth: authReducer,
+  properties: propertiesReducer,
 })
 
 export type RootState = ReturnType<typeof rootReducer>

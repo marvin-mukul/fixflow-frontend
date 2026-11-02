@@ -18,7 +18,7 @@ export function NavMain({ label, items }: { label: string; items: NavItem[] }) {
           <SidebarMenuItem key={item.to}>
             <SidebarMenuButton
               tooltip={item.title}
-              isActive={pathname === item.to || pathname.startsWith(`${item.to}/`)}
+              isActive={pathname === item.to || (!item.exact && pathname.startsWith(`${item.to}/`))}
               render={<Link to={item.to} />}
             >
               {item.icon}
