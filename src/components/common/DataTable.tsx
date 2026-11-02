@@ -24,6 +24,8 @@ interface DataTableProps<T> {
   loading?: boolean
   /** Shown instead of the table body when there are no rows (and not loading). */
   empty?: ReactNode
+  /** The load failed: with no rows, render nothing (the caller shows an ErrorAlert) instead of `empty`. */
+  failed?: boolean
   onRowClick?: (row: T) => void
   caption?: string
   className?: string
@@ -36,10 +38,12 @@ export function DataTable<T>({
   getRowId,
   loading = false,
   empty,
+  failed = false,
   onRowClick,
   caption,
   className,
 }: DataTableProps<T>) {
+  if (!loading && rows.length === 0 && failed) return null
   if (!loading && rows.length === 0 && empty) return <>{empty}</>
 
   return (

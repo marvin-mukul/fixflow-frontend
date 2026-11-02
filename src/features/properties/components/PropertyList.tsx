@@ -42,18 +42,19 @@ const COLUMNS: DataTableColumn<Property>[] = [
 ]
 
 export function PropertyList() {
-  const { items, loading, error } = useProperties()
+  const { items, loading, error, refresh } = useProperties()
   const navigate = useNavigate()
 
   return (
     <div className="flex flex-col gap-4">
-      <ErrorAlert title="Could not load properties" message={error?.message} />
+      <ErrorAlert title="Could not load properties" message={error?.message} onRetry={() => void refresh()} />
       <DataTable
         caption="Properties"
         columns={COLUMNS}
         rows={items}
         getRowId={(p) => p.id}
         loading={loading}
+        failed={!!error}
         onRowClick={(p) => navigate(buildPath(PATHS.CUSTOMER_PROPERTY_DETAIL, { id: p.id }))}
         empty={
           <EmptyState

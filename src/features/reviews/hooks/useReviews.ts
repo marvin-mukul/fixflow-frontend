@@ -26,9 +26,11 @@ export function useWorkerReviews(workerId: string) {
   const dispatch = useAppDispatch()
   const list = useAppSelector((state) => selectWorkerReviews(state, workerId))
 
-  useEffect(() => {
+  const reload = useCallback(() => {
     if (workerId) void dispatch(fetchWorkerReviews({ workerId }))
   }, [dispatch, workerId])
+
+  useEffect(reload, [reload])
 
   const nextCursor = list?.nextCursor ?? null
   const loadMore = useCallback(() => {
@@ -41,5 +43,6 @@ export function useWorkerReviews(workerId: string) {
     loading: !list || list.status === 'loading',
     hasMore: nextCursor !== null,
     loadMore,
+    reload,
   }
 }

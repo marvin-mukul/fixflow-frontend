@@ -196,7 +196,7 @@ export function PropertyDetail({ id, actions }: PropertyDetailProps) {
             />
             {property.pendingInvitations.length > 0 && (
               <div className="flex flex-col gap-2">
-                <h3 className="text-sm font-medium">Pending invitations</h3>
+                <h2 className="text-sm font-medium">Pending invitations</h2>
                 <ul className="flex flex-col gap-1 text-sm">
                   {property.pendingInvitations.map((inv) => (
                     <li key={inv.id} className="flex items-center justify-between rounded-lg border px-3 py-2">

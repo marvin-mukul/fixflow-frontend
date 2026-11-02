@@ -49,16 +49,17 @@ const COLUMNS: DataTableColumn<Job>[] = [
 
 function JobsPanel({ filter }: { filter: JobFilter }) {
   const navigate = useNavigate()
-  const { items, loading, error, hasMore, loadMore } = useWorkerJobs(filter)
+  const { items, loading, error, hasMore, loadMore, reload } = useWorkerJobs(filter)
   return (
     <div className="flex flex-col gap-4">
-      <ErrorAlert title="Could not load jobs" message={error?.message} />
+      <ErrorAlert title="Could not load jobs" message={error?.message} onRetry={reload} />
       <DataTable
         caption="Jobs"
         columns={COLUMNS}
         rows={items}
         getRowId={(j) => j.id}
         loading={loading}
+        failed={!!error}
         onRowClick={(j) => navigate(buildPath(PATHS.WORKER_JOB_DETAIL, { id: j.id }))}
         empty={
           <EmptyState

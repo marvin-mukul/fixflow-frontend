@@ -160,7 +160,7 @@ export function JobTrackingPanel({ jobId, onChanged, renderExtra }: JobTrackingP
           </dl>
           {photos.length > 0 && (
             <div className="flex flex-col gap-2">
-              <h3 className="text-sm font-medium">After photos</h3>
+              <h2 className="text-sm font-medium">After photos</h2>
               <PhotoGallery photos={photos} />
             </div>
           )}

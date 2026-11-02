@@ -19,7 +19,7 @@ import { formatDate } from '@/utils/format'
 /** Owner's queue of tenant requests waiting for approval. */
 export function ApprovalsInbox() {
   const dispatch = useAppDispatch()
-  const { items, loading, error, hasMore, loadMore } = useRequestList({ scope: 'approvals' })
+  const { items, loading, error, hasMore, loadMore, reload } = useRequestList({ scope: 'approvals' })
 
   const reject = async (request: RepairRequest, reason: string) => {
     await dispatch(rejectRequest({ id: request.id, reason })).unwrap()
@@ -94,13 +94,14 @@ export function ApprovalsInbox() {
 
   return (
     <div className="flex flex-col gap-3">
-      <ErrorAlert title="Could not load approvals" message={error?.message} />
+      <ErrorAlert title="Could not load approvals" message={error?.message} onRetry={reload} />
       <RequestTable
         caption="Requests awaiting approval"
         navigateOnRowClick={false}
         columns={columns}
         rows={items}
         loading={loading}
+        failed={!!error}
         hasMore={hasMore}
         onLoadMore={loadMore}
         empty={

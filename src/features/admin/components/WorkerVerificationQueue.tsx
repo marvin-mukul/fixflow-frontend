@@ -18,7 +18,7 @@ const TABS = Object.keys(WORKER_STATUS_SHORT) as WorkerVerificationStatus[]
 export function WorkerVerificationQueue() {
   const [status, setStatus] = useState<WorkerVerificationStatus>('PENDING')
   const [selectedId, setSelectedId] = useState<string | null>(null)
-  const { items, loading, error, filter } = useAdminWorkers(status)
+  const { items, loading, error, filter, reload } = useAdminWorkers(status)
   const rows = filter === status ? items : []
   const selected = rows.find((w) => w.id === selectedId) ?? null
 
@@ -85,13 +85,14 @@ export function WorkerVerificationQueue() {
           ))}
         </TabsList>
       </Tabs>
-      <ErrorAlert title="Could not load workers" message={error?.message} />
+      <ErrorAlert title="Could not load workers" message={error?.message} onRetry={reload} />
       <DataTable
         caption="Workers"
         columns={columns}
         rows={rows}
         getRowId={(w) => w.id}
         loading={loading}
+        failed={!!error}
         empty={
           <EmptyState
             icon={<UsersIcon />}

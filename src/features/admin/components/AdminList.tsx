@@ -22,7 +22,7 @@ interface AdminListProps {
 /** Superadmin: admins table with create and remove. */
 export function AdminList({ currentUserId }: AdminListProps) {
   const dispatch = useAppDispatch()
-  const { items, loading, error } = useAdmins()
+  const { items, loading, error, reload } = useAdmins()
 
   const remove = async (admin: AdminUser) => {
     try {
@@ -92,13 +92,14 @@ export function AdminList({ currentUserId }: AdminListProps) {
       <div className="flex justify-end">
         <CreateAdminDialog />
       </div>
-      <ErrorAlert title="Could not load admins" message={error?.message} />
+      <ErrorAlert title="Could not load admins" message={error?.message} onRetry={reload} />
       <DataTable
         caption="Admins"
         columns={columns}
         rows={items}
         getRowId={(a) => a.id}
         loading={loading}
+        failed={!!error}
         empty={<EmptyState icon={<ShieldIcon />} title="No admins yet" className="rounded-xl border border-dashed" />}
       />
     </div>

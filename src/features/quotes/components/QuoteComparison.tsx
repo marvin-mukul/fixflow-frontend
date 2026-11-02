@@ -122,7 +122,7 @@ export function QuoteComparison({ requestId, canAccept, onAccepted }: QuoteCompa
                 <div className="flex min-w-0 flex-col gap-2">
                   <div className="flex flex-wrap items-center gap-2">
                     {index === 0 && quote.rankScore !== null && (
-                      <Badge className="bg-amber-500 text-white">
+                      <Badge className="bg-amber-100 text-amber-900 dark:bg-amber-950 dark:text-amber-200">
                         <TrophyIcon data-icon="inline-start" />
                         Best match
                       </Badge>

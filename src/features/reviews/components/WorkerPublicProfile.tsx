@@ -30,7 +30,7 @@ export function WorkerPublicProfile({ id }: { id: string }) {
         description={
           <span className="flex flex-wrap items-center gap-3">
             {worker.verified && (
-              <Badge className="bg-emerald-600 text-white">
+              <Badge className="bg-emerald-700 text-white">
                 <BadgeCheckIcon data-icon="inline-start" />
                 Verified
               </Badge>

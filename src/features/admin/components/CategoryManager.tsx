@@ -15,7 +15,7 @@ import { useAppDispatch } from '@/store/hooks'
 /** All categories (incl. inactive) with create, edit and an active toggle. */
 export function CategoryManager() {
   const dispatch = useAppDispatch()
-  const { items, loading, error } = useAdminCategories()
+  const { items, loading, error, reload } = useAdminCategories()
   const [toggling, setToggling] = useState<string | null>(null)
 
   const toggle = async (category: AdminCategory, isActive: boolean) => {
@@ -59,13 +59,14 @@ export function CategoryManager() {
       <div className="flex justify-end">
         <CategoryFormDialog />
       </div>
-      <ErrorAlert title="Could not load categories" message={error?.message} />
+      <ErrorAlert title="Could not load categories" message={error?.message} onRetry={reload} />
       <DataTable
         caption="Categories"
         columns={columns}
         rows={items}
         getRowId={(c) => c.id}
         loading={loading}
+        failed={!!error}
         empty={
           <EmptyState
             icon={<TagsIcon />}

@@ -14,7 +14,7 @@ import { formatDateTime } from '@/utils/format'
 /** Disputes with open / resolved tabs; open ones can be resolved. */
 export function DisputeList() {
   const [status, setStatus] = useState<DisputeStatus>('OPEN')
-  const { items, loading, error, filter } = useDisputes(status)
+  const { items, loading, error, filter, reload } = useDisputes(status)
   const rows = filter === status ? items : []
 
   const columns: DataTableColumn<AdminDispute>[] = [
@@ -64,13 +64,14 @@ export function DisputeList() {
           <TabsTrigger value="RESOLVED">Resolved</TabsTrigger>
         </TabsList>
       </Tabs>
-      <ErrorAlert title="Could not load disputes" message={error?.message} />
+      <ErrorAlert title="Could not load disputes" message={error?.message} onRetry={reload} />
       <DataTable
         caption="Disputes"
         columns={columns}
         rows={rows}
         getRowId={(d) => d.id}
         loading={loading}
+        failed={!!error}
         empty={
           <EmptyState
             icon={<ScaleIcon />}

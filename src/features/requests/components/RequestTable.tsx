@@ -39,6 +39,8 @@ interface RequestTableProps {
   rows: RepairRequest[]
   loading: boolean
   empty: ReactNode
+  /** The list failed to load (an ErrorAlert is shown by the caller). */
+  failed?: boolean
   hasMore?: boolean
   onLoadMore?: () => void
   columns?: DataTableColumn<RepairRequest>[]
@@ -51,6 +53,7 @@ export function RequestTable({
   rows,
   loading,
   empty,
+  failed,
   hasMore,
   onLoadMore,
   columns = BASE_REQUEST_COLUMNS,
@@ -67,6 +70,7 @@ export function RequestTable({
         getRowId={(r) => r.id}
         loading={loading}
         empty={empty}
+        failed={failed}
         onRowClick={
           navigateOnRowClick
             ? (r) => navigate(buildPath(PATHS.CUSTOMER_REQUEST_DETAIL, { id: r.id }))

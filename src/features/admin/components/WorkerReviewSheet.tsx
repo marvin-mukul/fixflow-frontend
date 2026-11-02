@@ -107,13 +107,13 @@ export function WorkerReviewSheet({ worker, onOpenChange }: WorkerReviewSheetPro
               </dl>
               {worker.bio && (
                 <div className="flex flex-col gap-1">
-                  <h3 className="text-sm font-medium">Bio</h3>
+                  <h2 className="text-sm font-medium">Bio</h2>
                   <p className="text-sm whitespace-pre-line text-muted-foreground">{worker.bio}</p>
                 </div>
               )}
               <Separator />
               <div className="flex flex-col gap-2">
-                <h3 className="text-sm font-medium">Categories</h3>
+                <h2 className="text-sm font-medium">Categories</h2>
                 {worker.categories.length === 0 ? (
                   <p className="text-sm text-muted-foreground">No categories selected.</p>
                 ) : (
@@ -128,7 +128,7 @@ export function WorkerReviewSheet({ worker, onOpenChange }: WorkerReviewSheetPro
               </div>
               <Separator />
               <div className="flex flex-col gap-2">
-                <h3 className="text-sm font-medium">ID document</h3>
+                <h2 className="text-sm font-medium">ID document</h2>
                 {worker.idDocumentUrl ? (
                   <AuthDocument src={worker.idDocumentUrl} title={`ID document of ${worker.name}`} />
                 ) : (

@@ -1,5 +1,6 @@
 import { BadgeCheckIcon, RadarIcon, ReceiptIndianRupeeIcon } from 'lucide-react'
 import { Link } from 'react-router'
+import { ErrorAlert } from '@/components/common/ErrorAlert'
 import { StatCard } from '@/components/common/StatCard'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { buttonVariants } from '@/components/ui/button'
@@ -32,6 +33,7 @@ export function WorkerOverview() {
           </AlertDescription>
         </Alert>
       )}
+      <ErrorAlert title="Could not load leads" message={open.error?.message} onRetry={open.reload} />
       <div className="grid gap-4 sm:grid-cols-3">
         <StatCard
           label="Open leads to quote"

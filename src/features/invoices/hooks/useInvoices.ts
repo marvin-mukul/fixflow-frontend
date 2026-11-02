@@ -64,5 +64,6 @@ export function useEarnings() {
     if (status === 'idle') void dispatch(fetchEarnings())
   }, [dispatch, status])
 
-  return { earnings, error, loading: !earnings && (status === 'idle' || status === 'loading') }
+  const reload = useCallback(() => void dispatch(fetchEarnings()), [dispatch])
+  return { earnings, error, loading: !earnings && (status === 'idle' || status === 'loading'), reload }
 }

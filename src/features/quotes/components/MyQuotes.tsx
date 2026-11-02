@@ -53,13 +53,18 @@ export function MyQuotes({ limit }: { limit?: number }) {
 
   return (
     <div className="flex flex-col gap-3">
-      <ErrorAlert title="Could not load your quotes" message={error?.message} />
+      <ErrorAlert
+        title="Could not load your quotes"
+        message={error?.message}
+        onRetry={() => void dispatch(fetchMyQuotes())}
+      />
       <DataTable
         caption="My quotes"
         columns={COLUMNS}
         rows={limit ? items.slice(0, limit) : items}
         getRowId={(q) => q.id}
         loading={status === 'loading' || status === 'idle'}
+        failed={status === 'failed'}
         onRowClick={(q) => navigate(buildPath(PATHS.WORKER_LEAD_DETAIL, { requestId: q.request.id }))}
         empty={
           <EmptyState

@@ -15,9 +15,9 @@ const DIMENSIONS: RatingDimension[] = ['quality', 'punctuality', 'behaviour', 'v
 
 /** Public reviews of a worker, newest first, cursor-paginated. */
 export function ReviewList({ workerId }: { workerId: string }) {
-  const { items, error, loading, hasMore, loadMore } = useWorkerReviews(workerId)
+  const { items, error, loading, hasMore, loadMore, reload } = useWorkerReviews(workerId)
 
-  if (error && items.length === 0) return <ErrorAlert title="Could not load reviews" message={error.message} />
+  if (error && items.length === 0) return <ErrorAlert title="Could not load reviews" message={error.message} onRetry={reload} />
   if (loading && items.length === 0) return <Loader label="Loading reviews…" />
   if (items.length === 0) {
     return <EmptyState icon={<MessageSquareIcon />} title="No reviews yet" description="Reviews appear after completed jobs." />
