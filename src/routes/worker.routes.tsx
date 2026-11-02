@@ -26,6 +26,8 @@ export const workerRoutes: RouteObject[] = [
                   { path: PATHS.WORKER_LEADS, lazy: page(() => import('@/pages/LeadsPage')) },
                   { path: PATHS.WORKER_LEAD_DETAIL, lazy: page(() => import('@/pages/LeadDetailPage')) },
                   { path: PATHS.WORKER_QUOTES, lazy: page(() => import('@/pages/MyQuotesPage')) },
+                  { path: PATHS.WORKER_JOBS, lazy: page(() => import('@/pages/WorkerJobsPage')) },
+                  { path: PATHS.WORKER_JOB_DETAIL, lazy: page(() => import('@/pages/WorkerJobDetailPage')) },
                   { path: PATHS.WORKER_PROFILE, lazy: page(() => import('@/pages/WorkerProfilePage')) },
                 ],
               },

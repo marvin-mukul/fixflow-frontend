@@ -10,6 +10,10 @@ const RULES: LinkRule[] = [
   { pattern: /^\/requests\/([^/?#]+)/, to: (m) => buildPath(PATHS.CUSTOMER_REQUEST_DETAIL, { id: m[1] ?? '' }) },
   { pattern: /^\/requests\/?$/, to: () => PATHS.CUSTOMER_REQUESTS },
   { pattern: /^\/approvals\/?$/, to: () => PATHS.CUSTOMER_APPROVALS },
+  { pattern: /^\/worker\/jobs\/([^/?#]+)/, to: (m) => buildPath(PATHS.WORKER_JOB_DETAIL, { id: m[1] ?? '' }) },
+  { pattern: /^\/worker\/jobs\/?$/, to: () => PATHS.WORKER_JOBS },
+  { pattern: /^\/worker\/leads\/([^/?#]+)/, to: (m) => buildPath(PATHS.WORKER_LEAD_DETAIL, { requestId: m[1] ?? '' }) },
+  { pattern: /^\/worker\/profile\/?$/, to: () => PATHS.WORKER_PROFILE },
 ]
 
 export function resolveAppLink(link: string | null | undefined): string | null {
@@ -18,6 +22,6 @@ export function resolveAppLink(link: string | null | undefined): string | null {
     const match = link.match(rule.pattern)
     if (match) return rule.to(match)
   }
-  // Worker links (`/worker/...`) already match the app routes.
+  // Any other app-style path (`/worker/...`) is used as-is.
   return link.startsWith('/') ? link : null
 }

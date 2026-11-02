@@ -160,3 +160,44 @@ export function makeLead(overrides: Record<string, unknown> = {}) {
     ...overrides,
   }
 }
+
+export const JOB_ID = '55555555-5555-4555-8555-555555555555'
+export const INVOICE_ID = '66666666-6666-4666-8666-666666666666'
+
+export function makeJob(overrides: Record<string, unknown> = {}) {
+  return {
+    id: JOB_ID,
+    requestId: IDS.request,
+    subStatus: 'CONFIRMED',
+    requestStatus: 'SCHEDULED',
+    title: 'Kitchen sink leaking',
+    category: { id: IDS.category, slug: 'plumbing', name: 'Plumbing', icon: 'droplet' },
+    priority: 'HIGH',
+    quote: { id: 'q_1', labourPaise: 150000, materialsPaise: 50000, totalPaise: 200000, etaHours: 4, notes: null },
+    finalAmountPaise: 200000,
+    scheduledStart: '2026-11-03T05:30:00.000Z',
+    startedAt: null,
+    completedAt: null,
+    confirmedAt: null,
+    worker: { id: 'wp_1', name: 'Ravi Worker', phone: '+919811111111' },
+    property: {
+      label: 'Green Villa',
+      addressLine1: '12 Rajpur Road',
+      addressLine2: null,
+      city: 'Dehradun',
+      state: 'Uttarakhand',
+      pincode: '248001',
+      lat: 30.3165,
+      lng: 78.0322,
+    },
+    contact: { name: 'Tara Tenant', phone: '+919800000000' },
+    afterPhotos: [],
+    invoice: null,
+    dispute: null,
+    myReview: null,
+    myRelations: ['WORKER'],
+    workerActions: ['en_route'],
+    customerActions: [],
+    ...overrides,
+  }
+}

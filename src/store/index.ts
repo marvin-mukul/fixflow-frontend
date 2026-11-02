@@ -5,6 +5,7 @@ import {
   refreshSession,
   sessionCleared,
 } from '@/features/auth/store/authSlice'
+import { jobsReducer } from '@/features/jobs/store/jobsSlice'
 import { notificationsReducer } from '@/features/notifications/store/notificationsSlice'
 import { propertiesReducer } from '@/features/properties/store/propertiesSlice'
 import { quotesReducer } from '@/features/quotes/store/quotesSlice'
@@ -19,6 +20,7 @@ const appReducer = combineReducers({
   notifications: notificationsReducer,
   quotes: quotesReducer,
   worker: workerReducer,
+  jobs: jobsReducer,
 })
 
 export type RootState = ReturnType<typeof appReducer>

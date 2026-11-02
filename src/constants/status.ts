@@ -93,3 +93,11 @@ export const QUOTES_VISIBLE_IN: readonly RequestStatus[] = [
   'COMPLETED',
   'DISPUTED',
 ]
+
+export const JOB_SUB_STATUS = {
+  CONFIRMED: { label: 'Confirmed', variant: 'secondary' },
+  EN_ROUTE: { label: 'On the way', variant: 'secondary', className: 'bg-sky-100 text-sky-800 dark:bg-sky-950 dark:text-sky-200' },
+  ARRIVED: { label: 'Arrived', variant: 'secondary', className: 'bg-indigo-100 text-indigo-800 dark:bg-indigo-950 dark:text-indigo-200' },
+  WORKING: { label: 'Working', variant: 'secondary', className: 'bg-violet-100 text-violet-800 dark:bg-violet-950 dark:text-violet-200' },
+  DONE: { label: 'Done', variant: 'default', className: 'bg-emerald-600 text-white' },
+} as const satisfies Record<string, StatusConfig>

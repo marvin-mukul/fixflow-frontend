@@ -22,6 +22,8 @@ export const PATHS = {
   WORKER_LEADS: '/worker/leads',
   WORKER_LEAD_DETAIL: '/worker/leads/:requestId',
   WORKER_QUOTES: '/worker/quotes',
+  WORKER_JOBS: '/worker/jobs',
+  WORKER_JOB_DETAIL: '/worker/jobs/:id',
   WORKER_PROFILE: '/worker/profile',
 
   ADMIN_HOME: '/admin',
