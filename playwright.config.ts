@@ -45,7 +45,9 @@ export default defineConfig({
     },
     {
       name: 'web',
-      command: `npx vite --port ${WEB_PORT} --strictPort`,
+      // Production build + preview: no dev-server dependency optimizer, so no mid-test page
+      // reloads on first visit to a lazy route (that made cold runs flaky).
+      command: `npx vite build --logLevel warn && npx vite preview --port ${WEB_PORT} --strictPort`,
       url: WEB_ORIGIN,
       reuseExistingServer: !process.env.CI,
       timeout: 120_000,
