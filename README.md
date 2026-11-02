@@ -29,7 +29,7 @@ The backend must be running on `VITE_API_URL` (default `http://localhost:4000/ap
 
 | Variable | Default | Purpose |
 | --- | --- | --- |
-| `VITE_API_URL` | `http://localhost:4000/api/v1` | API base URL |
+| `VITE_API_URL` | `http://localhost:4000/api/v1` | API base URL. On Vercel set it to `/api/v1`: `vercel.json` proxies `/api/*` to the backend so the refresh cookie stays first-party |
 | `VITE_PAYMENT_PROVIDER` | `mock` | `mock` redirects to the built-in `/pay/mock/:orderId` test checkout. `cashfree` loads the Cashfree JS SDK on demand. It must match the backend's `PAYMENT_PROVIDER`. |
 | `VITE_MAPBOX_TOKEN` | empty | Optional. Without it, location pickers fall back to latitude/longitude inputs and maps show a coordinate card with an "open in map" link. With it, Mapbox GL is loaded as a lazy chunk. |
 
