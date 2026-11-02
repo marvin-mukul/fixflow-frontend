@@ -61,10 +61,10 @@ const COLUMNS: DataTableColumn<EarningsItem>[] = [
 /** Worker earnings: paid / pending payout totals and the invoice list. */
 export function EarningsOverview() {
   const navigate = useNavigate()
-  const { earnings, error, loading } = useEarnings()
+  const { earnings, error, loading, reload } = useEarnings()
   return (
     <div className="flex flex-col gap-6">
-      <ErrorAlert title="Could not load earnings" message={error?.message} />
+      <ErrorAlert title="Could not load earnings" message={error?.message} onRetry={reload} />
       <div className="grid gap-4 sm:grid-cols-3">
         <StatCard
           label="Paid out"
@@ -88,6 +88,7 @@ export function EarningsOverview() {
         rows={earnings?.items ?? []}
         getRowId={(i) => i.invoiceId}
         loading={loading}
+        failed={!!error && !earnings}
         onRowClick={(i) => navigate(buildPath(PATHS.INVOICE_DETAIL, { id: i.invoiceId }))}
         empty={
           <EmptyState

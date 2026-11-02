@@ -42,9 +42,11 @@ export function useLeads(filter: LeadFilter) {
   const select = useMemo(() => makeSelectLeadList(filter), [filter])
   const list = useAppSelector(select)
 
-  useEffect(() => {
+  const reload = useCallback(() => {
     void dispatch(fetchLeads({ filter }))
   }, [dispatch, filter])
+
+  useEffect(reload, [reload])
 
   const loadMore = useCallback(() => {
     if (list.nextCursor) void dispatch(fetchLeads({ filter, cursor: list.nextCursor }))
@@ -56,6 +58,7 @@ export function useLeads(filter: LeadFilter) {
     loading: list.status === 'loading' || list.status === 'idle',
     hasMore: list.nextCursor !== null,
     loadMore,
+    reload,
   }
 }
 

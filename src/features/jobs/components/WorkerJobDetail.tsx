@@ -12,12 +12,12 @@ import { StatusBadge } from '@/components/common/StatusBadge'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { buttonVariants } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Separator } from '@/components/ui/separator'
 import { PATHS } from '@/constants/paths'
 import { JobProgress } from '@/features/jobs/components/JobProgress'
 import { WorkerJobActions } from '@/features/jobs/components/WorkerJobActions'
 import { useJob } from '@/features/jobs/hooks/useJobs'
 import type { Job } from '@/features/jobs/types/job.types'
+import { cn } from '@/lib/utils'
 import { formatDateTime } from '@/utils/format'
 
 interface WorkerJobDetailProps {
@@ -26,9 +26,9 @@ interface WorkerJobDetailProps {
   renderExtra?: (job: Job, refresh: () => void) => ReactNode
 }
 
-function Row({ label, children }: { label: string; children: ReactNode }) {
+function Row({ label, children, divided }: { label: string; children: ReactNode; divided?: boolean }) {
   return (
-    <div className="flex items-center justify-between gap-4 text-sm">
+    <div className={cn('flex items-center justify-between gap-4 text-sm', divided && 'mt-1 border-t pt-3')}>
       <dt className="text-muted-foreground">{label}</dt>
       <dd className="text-right">{children}</dd>
     </div>
@@ -120,8 +120,7 @@ export function WorkerJobDetail({ id, renderExtra }: WorkerJobDetailProps) {
                     <MoneyText paise={job.finalAmountPaise} className="font-medium" />
                   </Row>
                 )}
-                <Separator className="my-1" />
-                <Row label="Scheduled">{formatDateTime(job.scheduledStart)}</Row>
+                <Row label="Scheduled" divided>{formatDateTime(job.scheduledStart)}</Row>
                 <Row label="Estimated time">{job.quote.etaHours} h</Row>
               </dl>
               {job.quote.notes && <p className="mt-3 text-sm whitespace-pre-line text-muted-foreground">{job.quote.notes}</p>}

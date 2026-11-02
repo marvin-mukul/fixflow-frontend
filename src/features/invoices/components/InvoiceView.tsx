@@ -1,14 +1,13 @@
 import type { ReactNode } from 'react'
 import { MoneyText } from '@/components/common/MoneyText'
 import { StatusBadge } from '@/components/common/StatusBadge'
-import { Separator } from '@/components/ui/separator'
 import type { Invoice } from '@/features/invoices/types/invoice.types'
 import { cn } from '@/lib/utils'
 import { formatDateTime } from '@/utils/format'
 
 function Line({ label, paise, negative, strong, hint }: { label: ReactNode; paise: number; negative?: boolean; strong?: boolean; hint?: ReactNode }) {
   return (
-    <div className={cn('flex items-baseline justify-between gap-4 text-sm', strong && 'text-base font-semibold')}>
+    <div className={cn('flex items-baseline justify-between gap-4 text-sm', strong && 'border-t pt-2 text-base font-semibold')}>
       <dt className={cn(!strong && 'text-muted-foreground')}>
         {label}
         {hint && <span className="ml-1 text-xs text-muted-foreground">{hint}</span>}
@@ -49,7 +48,6 @@ export function InvoiceView({ invoice }: { invoice: Invoice }) {
             <Line label="SGST" hint={pct(halfGst)} paise={invoice.sgstPaise} />
           </>
         )}
-        <Separator />
         <Line label="Total" paise={invoice.totalPaise} strong />
       </dl>
       {invoice.paidAt && (
@@ -57,7 +55,7 @@ export function InvoiceView({ invoice }: { invoice: Invoice }) {
       )}
       {invoice.breakdown && (
         <section aria-label="Payout breakdown" className="flex flex-col gap-2 rounded-xl bg-muted/50 p-3">
-          <h3 className="text-sm font-medium">Your payout</h3>
+          <h2 className="text-sm font-medium">Your payout</h2>
           <dl className="flex flex-col gap-1.5">
             <Line label="Invoice total" paise={invoice.totalPaise} />
             <Line label="Platform commission" hint={pct(rates?.commissionPercent)} paise={invoice.breakdown.commissionPaise} negative />
@@ -70,7 +68,6 @@ export function InvoiceView({ invoice }: { invoice: Invoice }) {
             {invoice.gstMode === 'PLATFORM_9_5' && invoice.igstPaise + invoice.cgstPaise + invoice.sgstPaise > 0 && (
               <Line label="GST (remitted by the platform)" paise={invoice.igstPaise + invoice.cgstPaise + invoice.sgstPaise} negative />
             )}
-            <Separator />
             <Line label="You receive" paise={invoice.breakdown.workerPayoutPaise} strong />
           </dl>
         </section>

@@ -1,5 +1,6 @@
 import { CalendarCheckIcon, ClipboardListIcon, InboxIcon, PlusIcon } from 'lucide-react'
 import { Link } from 'react-router'
+import { ErrorAlert } from '@/components/common/ErrorAlert'
 import { EmptyState } from '@/components/common/EmptyState'
 import { StatCard } from '@/components/common/StatCard'
 import { buttonVariants } from '@/components/ui/button'
@@ -20,8 +21,12 @@ export function RequestOverview() {
   const approvals = useRequestList({ scope: 'approvals' })
   const recent = useRequestList({ scope: 'all' })
 
+  const failed = [active, ongoing, approvals, recent].find((list) => list.error)
+  const retryAll = () => [active, ongoing, approvals, recent].forEach((list) => list.reload())
+
   return (
     <div className="flex flex-col gap-6">
+      <ErrorAlert title="Could not load your requests" message={failed?.error?.message} onRetry={retryAll} />
       <div className="grid gap-4 sm:grid-cols-3">
         <StatCard
           label="Active requests"
@@ -62,6 +67,7 @@ export function RequestOverview() {
           <RequestTable
             rows={recent.items.slice(0, 5)}
             loading={recent.loading}
+            failed={!!recent.error}
             empty={
               <EmptyState
                 icon={<ClipboardListIcon />}

@@ -20,23 +20,24 @@ const TABS: { value: Tab; label: string }[] = [
 ]
 
 function TabPanel({ tab }: { tab: Tab }) {
-  const { items, loading, error, hasMore, loadMore } = useRequestList({
+  const { items, loading, error, hasMore, loadMore, reload } = useRequestList({
     scope: 'all',
     status: tab === 'all' ? undefined : REQUEST_STATUS_GROUPS[tab].statuses,
   })
   return (
     <div className="flex flex-col gap-3">
-      <ErrorAlert title="Could not load requests" message={error?.message} />
+      <ErrorAlert title="Could not load requests" message={error?.message} onRetry={reload} />
       <RequestTable
         rows={items}
         loading={loading}
+        failed={!!error}
         hasMore={hasMore}
         onLoadMore={loadMore}
         empty={
           <EmptyState
             icon={<ClipboardListIcon />}
             title="Nothing here"
-            description="Requests you raise, pay for or own the property of show up here."
+            description="Requests you raise, pay for, or that concern your properties show up here."
             className="rounded-xl border border-dashed"
             action={
               <Link to={PATHS.CUSTOMER_REQUEST_NEW} className={buttonVariants()}>

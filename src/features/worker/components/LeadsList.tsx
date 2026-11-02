@@ -62,12 +62,12 @@ const COLUMNS: DataTableColumn<Lead>[] = [
 function LeadsPanel({ filter }: { filter: LeadFilter }) {
   const navigate = useNavigate()
   const { profile } = useWorkerProfile()
-  const { items, loading, error, hasMore, loadMore } = useLeads(filter)
+  const { items, loading, error, hasMore, loadMore, reload } = useLeads(filter)
   const open = (requestId: string) => navigate(buildPath(PATHS.WORKER_LEAD_DETAIL, { requestId }))
 
   return (
     <div className="flex flex-col gap-4">
-      <ErrorAlert title="Could not load leads" message={error?.message} />
+      <ErrorAlert title="Could not load leads" message={error?.message} onRetry={reload} />
       <LeadsMap
         center={profile ? { lat: profile.baseLat, lng: profile.baseLng } : null}
         radiusKm={profile?.serviceRadiusKm}
@@ -80,6 +80,7 @@ function LeadsPanel({ filter }: { filter: LeadFilter }) {
         rows={items}
         getRowId={(l) => l.requestId}
         loading={loading}
+        failed={!!error}
         onRowClick={(l) => open(l.requestId)}
         empty={
           <EmptyState

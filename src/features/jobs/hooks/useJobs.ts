@@ -15,9 +15,11 @@ export function useWorkerJobs(filter: JobFilter) {
   const select = useMemo(() => makeSelectWorkerJobList(filter), [filter])
   const list = useAppSelector(select)
 
-  useEffect(() => {
+  const reload = useCallback(() => {
     void dispatch(fetchWorkerJobs({ filter }))
   }, [dispatch, filter])
+
+  useEffect(reload, [reload])
 
   const loadMore = useCallback(() => {
     if (list.nextCursor) void dispatch(fetchWorkerJobs({ filter, cursor: list.nextCursor }))
@@ -29,6 +31,7 @@ export function useWorkerJobs(filter: JobFilter) {
     loading: list.status === 'loading' || list.status === 'idle',
     hasMore: list.nextCursor !== null,
     loadMore,
+    reload,
   }
 }
 

@@ -24,7 +24,7 @@ const REFUNDABLE: readonly PaymentStatus[] = ['PAID', 'PARTIALLY_REFUNDED']
 /** Payments with a status filter; paid ones can be refunded fully or partly. */
 export function PaymentList() {
   const [status, setStatus] = useState<Filter>('ALL')
-  const { items, loading, error, filter } = usePayments(status)
+  const { items, loading, error, filter, reload } = usePayments(status)
   const rows = filter === status ? items : []
 
   const columns: DataTableColumn<AdminPayment>[] = [
@@ -68,13 +68,14 @@ export function PaymentList() {
           onChange={(v) => setStatus(v as Filter)}
         />
       </div>
-      <ErrorAlert title="Could not load payments" message={error?.message} />
+      <ErrorAlert title="Could not load payments" message={error?.message} onRetry={reload} />
       <DataTable
         caption="Payments"
         columns={columns}
         rows={rows}
         getRowId={(p) => p.id}
         loading={loading}
+        failed={!!error}
         empty={
           <EmptyState
             icon={<CreditCardIcon />}

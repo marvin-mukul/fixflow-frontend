@@ -20,9 +20,11 @@ export function useRequestList(query: RequestQuery) {
   const selectList = useMemo(() => makeSelectRequestList(key), [key])
   const list = useAppSelector(selectList)
 
-  useEffect(() => {
+  const reload = useCallback(() => {
     void dispatch(fetchRequests({ query: JSON.parse(key) as RequestQuery }))
   }, [dispatch, key])
+
+  useEffect(reload, [reload])
 
   const loadMore = useCallback(() => {
     if (list.nextCursor) {
@@ -37,6 +39,7 @@ export function useRequestList(query: RequestQuery) {
     loading: list.status === 'loading' || list.status === 'idle',
     hasMore: list.nextCursor !== null,
     loadMore,
+    reload,
   }
 }
 
