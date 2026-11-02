@@ -1,11 +1,4 @@
 import { createBrowserRouter } from 'react-router'
-import { publicRoutes } from './public.routes'
+import { appRoutes } from '@/routes/appRoutes'
 
-export const router = createBrowserRouter([
-  ...publicRoutes,
-  {
-    path: '*',
-    lazy: () =>
-      import('@/pages/NotFoundPage').then((m) => ({ Component: m.default })),
-  },
-])
+export const router = createBrowserRouter(appRoutes)
