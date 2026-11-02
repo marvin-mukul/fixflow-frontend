@@ -101,3 +101,11 @@ export const JOB_SUB_STATUS = {
   WORKING: { label: 'Working', variant: 'secondary', className: 'bg-violet-100 text-violet-800 dark:bg-violet-950 dark:text-violet-200' },
   DONE: { label: 'Done', variant: 'default', className: 'bg-emerald-600 text-white' },
 } as const satisfies Record<string, StatusConfig>
+
+export const INVOICE_STATUS = {
+  ISSUED: { label: 'Awaiting payment', variant: 'outline', className: 'border-amber-300 text-amber-700 dark:text-amber-300' },
+  PAID: { label: 'Paid', variant: 'default', className: 'bg-emerald-600 text-white' },
+  PAID_OFFLINE: { label: 'Paid offline', variant: 'default', className: 'bg-emerald-600 text-white' },
+  REFUNDED: { label: 'Refunded', variant: 'secondary' },
+  PARTIALLY_REFUNDED: { label: 'Partly refunded', variant: 'secondary' },
+} as const satisfies Record<string, StatusConfig>

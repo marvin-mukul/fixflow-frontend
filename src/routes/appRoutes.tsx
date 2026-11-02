@@ -6,6 +6,7 @@ import { adminRoutes } from '@/routes/admin.routes'
 import { authRoutes } from '@/routes/auth.routes'
 import { customerRoutes } from '@/routes/customer.routes'
 import { publicRoutes } from '@/routes/public.routes'
+import { sharedRoutes } from '@/routes/shared.routes'
 import { workerRoutes } from '@/routes/worker.routes'
 
 /** Route tree shared by the browser router and tests (memory router). */
@@ -20,6 +21,7 @@ export const appRoutes: RouteObject[] = [
       ...customerRoutes,
       ...workerRoutes,
       ...adminRoutes,
+      ...sharedRoutes,
       {
         path: PATHS.NOT_FOUND,
         lazy: () => import('@/pages/NotFoundPage').then((m) => ({ Component: m.default })),

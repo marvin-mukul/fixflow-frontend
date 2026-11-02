@@ -24,9 +24,15 @@ export const PATHS = {
   WORKER_QUOTES: '/worker/quotes',
   WORKER_JOBS: '/worker/jobs',
   WORKER_JOB_DETAIL: '/worker/jobs/:id',
+  WORKER_EARNINGS: '/worker/earnings',
   WORKER_PROFILE: '/worker/profile',
 
   ADMIN_HOME: '/admin',
+
+  /** Any signed-in participant; also the payment return landing page (`?status=`). */
+  INVOICE_DETAIL: '/invoices/:id',
+  /** Mock provider checkout (`PAYMENT_PROVIDER=mock`). */
+  MOCK_PAY: '/pay/mock/:orderId',
   NOT_FOUND: '*',
 } as const
 

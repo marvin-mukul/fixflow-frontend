@@ -201,3 +201,28 @@ export function makeJob(overrides: Record<string, unknown> = {}) {
     ...overrides,
   }
 }
+
+export function makeInvoice(overrides: Record<string, unknown> = {}) {
+  return {
+    id: INVOICE_ID,
+    number: 'FF-2026-000001',
+    jobId: JOB_ID,
+    requestId: IDS.request,
+    requestTitle: 'Kitchen sink leaking',
+    workerName: 'Ravi Worker',
+    payerUserId: 'u_1',
+    status: 'ISSUED',
+    servicePaise: 200000,
+    cgstPaise: 18000,
+    sgstPaise: 18000,
+    igstPaise: 0,
+    totalPaise: 236000,
+    gstMode: 'PLATFORM_9_5',
+    issuedAt: '2026-11-02T10:00:00.000Z',
+    paidAt: null,
+    offlineMarkedAt: null,
+    payments: [],
+    breakdown: null,
+    ...overrides,
+  }
+}
