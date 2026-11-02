@@ -44,7 +44,14 @@ export interface Job {
   afterPhotos: { id: string; url: string; mimeType: string }[]
   invoice: { id: string; number: string; status: string; totalPaise: number } | null
   dispute: { id: string; status: string; reason: string; resolution: string | null } | null
-  myReview: { id: string; overall: number; createdAt?: string } | null
+  myReview: {
+    id: string
+    overall: number
+    revieweeType?: string
+    createdAt?: string
+    editedAt?: string | null
+    editable?: boolean
+  } | null
   myRelations: string[]
   workerActions: WorkerJobAction[]
   customerActions: string[]
